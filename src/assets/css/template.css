@@ -1,0 +1,10 @@
+body {
+	color: var(--color-text);
+	font-size: 20px;
+	line-height: 1.5;
+}
+
+body:has(.App) {
+	min-height: 100vh;
+	background-color: var(--color-secondary);
+}

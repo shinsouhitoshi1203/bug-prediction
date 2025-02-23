@@ -1,0 +1,48 @@
+/* 
+
+@config "../../../tailwind.config.cjs";
+
+@layer components {
+    .base-button {
+        @apply w-24 py-3 bg-red-500 text-white font-bold rounded-full;
+    }
+}
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+*/
+@import "./template.css";
+@import "tailwindcss";
+
+/* theming */
+@theme {
+	--color-primary: #3f4815;
+	--color-secondary: #dbeb8b;
+	--color-tertiary: #b2ea1b;
+	--color-text: #333;
+	--color-heading: #3f4815;
+	--color-heading2: #000;
+	--color-input: #1567cd;
+}
+
+/* configuration from cjs */
+@config "../../../tailwind.config.cjs";
+
+/* include new class */
+@layer components {
+	.font-big {
+		@apply font-[700] text-[36px]/[1.2] md:font-[800] md:text-[48px]/[1.68] text-heading;
+	}
+	.font-heading {
+		@apply font-bold text-[36px]/[1.68] text-heading;
+	}
+	.font-subheading {
+		@apply font-semibold text-[28px]/[1.68] text-heading;
+	}
+	.font-medium {
+		@apply font-medium text-[24px]/[1.5] text-heading;
+	}
+	.font-body {
+		@apply font-normal text-[20px]/[1.5] text-heading;
+	}
+}

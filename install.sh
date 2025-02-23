@@ -1,0 +1,1 @@
+yarn add @mui/material @emotion/react @emotion/styled react-router-dom  tailwindcss @tailwindcss/vite
