@@ -4,7 +4,8 @@ function Navigation() {
 	return (
 		<div className="my-[20px]">
 			<nav className="flex items-center gap-4">
-				<Button></Button>
+				<Button>
+                Test</Button>
 			</nav>
 		</div>
 	);
