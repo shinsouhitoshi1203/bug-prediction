@@ -45,4 +45,7 @@
 	.font-body {
 		@apply font-normal text-[20px]/[1.5] text-heading;
 	}
+	.tooltip-fixed {
+		@apply font-normal bg-primary/30 text-heading;
+	}
 }

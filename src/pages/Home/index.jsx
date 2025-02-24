@@ -1,7 +1,9 @@
+import Form from "./Form";
+
 function Home() {
 	return (
 		<>
-			<p>Mời bà con dùng thử</p>
+			<Form />
 		</>
 	);
 }
