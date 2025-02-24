@@ -4,7 +4,7 @@ import Navigation from "./layouts/Navigation";
 function App() {
 	return (
 		<div className="App">
-			<div className="container mx-auto px-4 max-w-[1280px]">
+			<div className="container mx-auto px-4 sm:px-[48px] max-w-[1280px]">
 				<Navigation />
 				<section className="title flex items-center justify-center gap-8 md:mt-10 sm:mt-10 ">
 					<img
