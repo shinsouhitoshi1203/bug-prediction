@@ -1,14 +1,17 @@
-import { createContext, useCallback, useState } from "react";
+import { createContext, useCallback, useRef, useState } from "react";
 import Province from "./Province";
 import Day from "./Day";
 import { Button, Checkbox, FormControl, FormControlLabel } from "@mui/material";
 import dayjs from "dayjs";
+import { useNavigate } from "react-router-dom";
 
 export const InputProvider = createContext();
 function Form() {
+	const date = useRef(new Date().toISOString());
+
 	const [province, setProvince] = useState(null);
-	const [date, setDate] = useState(new Date().toISOString());
 	const [remember, setRemember] = useState(true);
+
 	const handleSelectProvince = useCallback((event, newValue) => {
 		setProvince(newValue);
 	}, []);
@@ -16,16 +19,18 @@ function Form() {
 		setRemember(newValue);
 	}, []);
 
-	const getToday = useCallback(() => {
-		setDate(new Date().toISOString());
-	}, []);
+	const navigate = useNavigate();
+
 	const submit = useCallback(() => {
 		const tinh = province?.label;
-		const ngay = date;
+		const ngay = date.current;
 		const ghinho = remember;
 		if (!tinh || !ngay) return;
 		console.log({ province: tinh, date: ngay, remember: ghinho });
 	}, [province, date, remember]);
+	const goHelp = useCallback(() => {
+		navigate("/help");
+	}, []);
 	return (
 		<InputProvider.Provider value={{ province, handleSelectProvince }}>
 			<div className="form-weather p-6 rounded-sm shadow-[3px_3px_0_0] shadow-text/40 bg-white max-w-[550px] mx-auto">
@@ -47,6 +52,7 @@ function Form() {
 							<Button
 								variant="outlined"
 								classes={{ root: "font-sans" }}
+								onClick={goHelp}
 							>
 								Trợ giúp
 							</Button>

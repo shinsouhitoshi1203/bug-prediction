@@ -1,3 +1,4 @@
+import { sampleData } from "../../../json/bugs";
 import { dataSample } from "../../../json/weather";
 import Prediction from "../../layouts/Prediction";
 import Weather from "../../layouts/Weather";
@@ -22,7 +23,7 @@ function Success() {
 					<Weather data={dataSample} />
 				</div>
 				<div className="w-full lg:w-1/2 xl:w-2/3">
-					<Prediction />
+					<Prediction data={sampleData} />
 				</div>
 			</div>
 		</>

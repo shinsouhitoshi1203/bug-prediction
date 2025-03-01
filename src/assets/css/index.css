@@ -49,4 +49,9 @@
 	.tooltip-fixed {
 		@apply font-normal bg-primary/30 text-heading;
 	}
+
+	/*  */
+	.tags {
+		@apply px-3  rounded-full hover:bg-primary/40 transition-[background-color] duration-350;
+	}
 }
