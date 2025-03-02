@@ -1,7 +1,6 @@
-import { sampleData } from "../../../json/bugs";
-import { dataSample } from "../../../json/weather";
 import Prediction from "../../layouts/Prediction";
 import Weather from "../../layouts/Weather";
+import store from "../../store/controls";
 import useStore from "../../store/useStore.cjs";
 const day_of_week = [
 	"Chủ Nhật",
@@ -19,7 +18,7 @@ ${new Date().getFullYear()}`;
 
 function Success({ previousData = false }) {
 	const weather = useStore((state) => state.cache.weather);
-
+	const prediction = store.get.prediction;
 	return (
 		<>
 			<p className="dt font-medium my-4">{day}</p>
@@ -29,7 +28,7 @@ function Success({ previousData = false }) {
 				</div>
 				<div className="w-full lg:w-1/2 xl:w-2/3">
 					{previousData ? (
-						<Prediction data={sampleData} />
+						<Prediction data={prediction} />
 					) : (
 						<Prediction />
 					)}
