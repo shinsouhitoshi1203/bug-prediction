@@ -1,7 +1,7 @@
 const formatJSON = {
 	type: "object",
 	properties: {
-		pest_list: {
+		issue_list: {
 			type: "array",
 			items: {
 				type: "object",
@@ -9,11 +9,11 @@ const formatJSON = {
 					issue_name: {
 						type: "string"
 					},
-					type: {
+					issue_type: {
 						type: "string"
 					}
 				},
-				required: ["issue_name", "type"]
+				required: ["issue_name", "issue_type"]
 			}
 		},
 		detailed_list: {
@@ -24,7 +24,7 @@ const formatJSON = {
 					issue_name: {
 						type: "string"
 					},
-					type: {
+					issue_type: {
 						type: "string"
 					},
 					issue_description: {
@@ -39,13 +39,13 @@ const formatJSON = {
 				},
 				required: [
 					"issue_name",
-					"type",
+					"issue_type",
 					"issue_description",
 					"suggestions"
 				]
 			}
 		}
 	},
-	required: ["pest_list", "detailed_list"]
+	required: ["issue_list", "detailed_list"]
 };
 export default formatJSON;
