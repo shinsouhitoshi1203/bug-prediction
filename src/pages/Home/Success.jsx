@@ -17,7 +17,7 @@ const day = `Hôm nay là ${day_of_week[new Date().getDay()]}, ngày
 ${new Date().getDate()} tháng ${new Date().getMonth() + 1} năm
 ${new Date().getFullYear()}`;
 
-function Success() {
+function Success({ previousData = false }) {
 	const weather = useStore((state) => state.cache.weather);
 
 	return (
@@ -28,7 +28,11 @@ function Success() {
 					<Weather data={weather} />
 				</div>
 				<div className="w-full lg:w-1/2 xl:w-2/3">
-					<Prediction data={sampleData} />
+					{previousData ? (
+						<Prediction data={sampleData} />
+					) : (
+						<Prediction />
+					)}
 				</div>
 			</div>
 		</>

@@ -9,6 +9,7 @@ const useStore = create(
 				inDefault: true,
 				isLoading: { weather: false, prediction: false }
 			},
+			hasPreviousData: false,
 			savePrevious: true,
 			previous: {
 				province: ""

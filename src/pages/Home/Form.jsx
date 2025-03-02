@@ -6,12 +6,13 @@ import dayjs from "dayjs";
 import { useNavigate } from "react-router-dom";
 import sendWeatherRequest from "../../weather";
 import useStore from "../../store/useStore.cjs";
+import store from "../../store/controls";
 
 export const InputProvider = createContext();
 function Form() {
 	const disabled = useStore((state) => state.disabledInput);
 	const date = useRef(new Date().toISOString().split("T")[0]);
-
+	console.log(disabled);
 	const [province, setProvince] = useState(null);
 	const [remember, setRemember] = useState(true);
 
@@ -45,6 +46,7 @@ function Form() {
 	}, [province, remember]);
 
 	const goHelp = useCallback(() => {
+		store.previous.save();
 		navigate("/help");
 	}, []);
 

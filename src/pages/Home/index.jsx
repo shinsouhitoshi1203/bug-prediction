@@ -27,7 +27,7 @@ function Home() {
 				if (!inDefault) {
 					const { weather, prediction } = isLoading;
 					const { error } = status;
-					if (error) {
+					if (error != "" && error != "PREDICT_ERROR") {
 						setContent(<Fail message={error} />);
 						return;
 					}
@@ -35,16 +35,27 @@ function Home() {
 						setContent(<Loading />);
 					} else {
 						if (!weather && prediction) {
+							// load the loading then show the full data
+
 							setContent(<Success />);
 						} else {
-							if (!weather && !prediction && store.has.data) {
-								// day la du lieu da duoc lay truoc do
-								setContent(
-									<>
-										<Bar message="Đây là dữ liệu đã được lấy trước đó" />
-										<Success />
-									</>
-								);
+							if (!weather && !prediction) {
+								if (!store.has.previous) {
+									// day la du lieu moi nhat
+									setContent(
+										<>
+											<Success />
+										</>
+									);
+								} else {
+									// day la du lieu da duoc lay truoc do
+									setContent(
+										<>
+											<Bar message="Đây là dữ liệu đã được lấy trước đó" />
+											<Success previousData />
+										</>
+									);
+								}
 							}
 							// set nothing
 						}
@@ -52,10 +63,9 @@ function Home() {
 				} else {
 					// error handling or in default?
 					const { error } = status;
-					if (error) {
-						setContent(<h1>{error}</h1>);
-					} else {
-						setContent(<></>);
+					if (error != "" && error != "PREDICT_ERROR") {
+						setContent(<Fail message={error} />);
+						return;
 					}
 				}
 			},

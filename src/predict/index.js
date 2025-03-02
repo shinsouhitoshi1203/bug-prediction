@@ -7,7 +7,7 @@ const genAI = new GoogleGenerativeAI(apiKey);
 const model = genAI.getGenerativeModel({
 	model: "gemini-2.0-pro-exp-02-05",
 	systemInstruction:
-		"Combine the conditions of provided crop's season (Đông Xuân, Hè Thu, Mùa, Thu Đông), rice's stage and weather's season altogether. Don't add any numerous data into description. Description includes: Occur time, and its affect. Issues are pests and disease for rice plant in Mekong Delta. Issue type's must be 'pest' or 'disease'. Only list issues with greatest affect. DON'T SUGGEST TOO GENERALLY, suggestions should be in VIETNAMESE, specific, practical and as much as possible. Recommend adding some instructions (only tell the name) for spraying pesticides based on recommendations (Nguyên tắc 4 đúng, 3 giảm 3 tăng, ...)"
+		"All of the data must be in Vietnamese. Description: \n - Description includes: Occur time, and detail issue's affects on the plants specifically. \n - Combine the conditions of provided crop's season (Đông Xuân, Hè Thu, Mùa, Thu Đông), rice's stage and weather's season altogether. \n - Don't add any numerous data into the description such as date, year, temperatures and humidity. \n - Issues are pests and disease for rice plant in Mekong Delta. \n - Issue type's must be 'pest' or 'disease'. \n -  Only list issues with greatest affect. \n Suggestions: \n -  DON'T SUGGEST TOO GENERALLY, suggestions should be specific, practical and as much as possible. \n - Recommend adding some instructions (only tell the name) for spraying pesticides based on recommendations (Nguyên tắc 4 đúng, 3 giảm 3 tăng, ...)"
 });
 
 const generationConfig = {
@@ -40,11 +40,11 @@ async function run2() {
 	});
 	console.log(result.response.text());
 }
-async function run() {
+async function run(inputObject = "") {
 	const parts = [
 		// your input here
 		{
-			text: 'input: ```json\n{"city":"Long An","weather":{"description":["Sunny"],"img":"https://cdn.worldweatheronline.com/images/wsymbols01_png_64/wsymbol_0002_sunny_intervals.png","temperature":31,"humidity":53},"data":{"date":"2025-03-02","season":"Mùa khô","time":"day","riceSeason":"Đông Xuân","riceStage":"Đẻ nhánh","location":"Đồng bằng Sông Cửu Long"}}```'
+			text: inputObject
 		}
 	];
 
@@ -52,7 +52,8 @@ async function run() {
 		contents: [{ role: "user", parts }],
 		generationConfig
 	});
-	console.log(result.response.text());
+	return result.response.text();
 }
 // run();
 export default run;
+// text: 'input: ```json\n{"city":"Long An","weather":{"description":["Sunny"],"img":"https://cdn.worldweatheronline.com/images/wsymbols01_png_64/wsymbol_0002_sunny_intervals.png","temperature":31,"humidity":53},"data":{"date":"2025-03-02","season":"Mùa khô","time":"day","riceSeason":"Đông Xuân","riceStage":"Đẻ nhánh","location":"Đồng bằng Sông Cửu Long"}}```'

@@ -1,5 +1,4 @@
 import run from "../../predict";
-run();
 function TestPage() {
 	return (
 		<>
