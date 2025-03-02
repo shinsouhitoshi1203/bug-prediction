@@ -1,21 +1,7 @@
 import { Autocomplete, TextField } from "@mui/material";
 import useInput from "../../hooks/useInput";
-const list = [
-	// use the Data from JSON list
-	{ label: "An Giang" },
-	{ label: "Bạc Liêu" },
-	{ label: "Bến Tre" },
-	{ label: "Cà Mau" },
-	{ label: "Long An" },
-	{ label: "Tiền Giang" },
-	{ label: "Trà Vinh" },
-	{ label: "Vĩnh Long" },
-	{ label: "Đồng Tháp" },
-	{ label: "Hậu Giang" },
-	{ label: "Kiên Giang" },
-	{ label: "Sóc Trăng" },
-	{ label: "Cần Thơ" }
-];
+import useStore from "../../store/useStore.cjs";
+import list from "../../data/province";
 const render = (params) => {
 	return (
 		<TextField
@@ -33,6 +19,8 @@ const render = (params) => {
 	);
 };
 function Province() {
+	const disabled = useStore((state) => state.disabledInput);
+
 	const { province, handleSelectProvince } = useInput();
 	return (
 		<>
@@ -51,6 +39,7 @@ function Province() {
 				}}
 				onChange={handleSelectProvince}
 				value={province}
+				disabled={disabled}
 				disablePortal
 				options={list.sort((a, b) => -b.label.localeCompare(a.label))}
 				renderInput={render}

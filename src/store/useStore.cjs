@@ -1,12 +1,24 @@
 import { create } from "zustand";
-const useStore = create((set, get) => {
-	return {
-		savePrevious: true,
-		previous: {
-			province: ""
-		},
-		status: "success"
-	};
-});
+import { subscribeWithSelector } from "zustand/middleware";
+const useStore = create(
+	subscribeWithSelector((set, get) => {
+		return {
+			disabledInput: false,
+			status: {
+				error: "",
+				inDefault: true,
+				isLoading: { weather: false, prediction: false }
+			},
+			savePrevious: true,
+			previous: {
+				province: ""
+			},
+			cache: {
+				weather: {},
+				prediction: {}
+			}
+		};
+	})
+);
 
 export default useStore;

@@ -1,13 +1,16 @@
-import { createContext, useCallback, useRef, useState } from "react";
+import { createContext, memo, useCallback, useRef, useState } from "react";
 import Province from "./Province";
 import Day from "./Day";
 import { Button, Checkbox, FormControl, FormControlLabel } from "@mui/material";
 import dayjs from "dayjs";
 import { useNavigate } from "react-router-dom";
+import sendWeatherRequest from "../../weather";
+import useStore from "../../store/useStore.cjs";
 
 export const InputProvider = createContext();
 function Form() {
-	const date = useRef(new Date().toISOString());
+	const disabled = useStore((state) => state.disabledInput);
+	const date = useRef(new Date().toISOString().split("T")[0]);
 
 	const [province, setProvince] = useState(null);
 	const [remember, setRemember] = useState(true);
@@ -15,6 +18,7 @@ function Form() {
 	const handleSelectProvince = useCallback((event, newValue) => {
 		setProvince(newValue);
 	}, []);
+
 	const handleRemember = useCallback((event, newValue) => {
 		setRemember(newValue);
 	}, []);
@@ -25,12 +29,25 @@ function Form() {
 		const tinh = province?.label;
 		const ngay = date.current;
 		const ghinho = remember;
+		const matinh = province?.value;
+
 		if (!tinh || !ngay) return;
-		console.log({ province: tinh, date: ngay, remember: ghinho });
-	}, [province, date, remember]);
+
+		// process
+		const data = {
+			province: tinh,
+			date: ngay,
+			remember: ghinho,
+			provinceCode: matinh
+		};
+
+		sendWeatherRequest(data);
+	}, [province, remember]);
+
 	const goHelp = useCallback(() => {
 		navigate("/help");
 	}, []);
+
 	return (
 		<InputProvider.Provider value={{ province, handleSelectProvince }}>
 			<div className="form-weather p-6 rounded-sm shadow-[3px_3px_0_0] shadow-text/40 bg-white max-w-[550px] mx-auto">
@@ -42,6 +59,7 @@ function Form() {
 					</div>
 					<div className="form-options flex flex-col md:flex-row flex-wrap items-center justify-between gap-3 ">
 						<FormControlLabel
+							disabled={disabled}
 							control={<Checkbox />}
 							label="Tự động nhớ vào lần sau"
 							classes={{ label: "font-sans" }}
@@ -57,6 +75,7 @@ function Form() {
 								Trợ giúp
 							</Button>
 							<Button
+								disabled={disabled}
 								variant="contained"
 								classes={{ root: "font-sans" }}
 								onClick={submit}
@@ -70,4 +89,4 @@ function Form() {
 		</InputProvider.Provider>
 	);
 }
-export default Form;
+export default memo(Form);
