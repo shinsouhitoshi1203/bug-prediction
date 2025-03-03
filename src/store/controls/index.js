@@ -7,8 +7,6 @@ const store = {
 		},
 		get data() {
 			const { weather, prediction } = useStore.getState().cache;
-			console.log(weather, prediction);
-
 			return (
 				Object.keys(weather).length > 0 ||
 				Object.keys(prediction).length > 0

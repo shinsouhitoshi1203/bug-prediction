@@ -44,7 +44,6 @@ function filter(jsonData, rest) {
 function renderRequest(jsData) {
 	const jsonData =
 		"input: ```json\n" + JSON.stringify(jsData, null, "") + "```";
-	console.log("Geminied\n", jsonData);
 	return jsonData;
 }
 
@@ -122,7 +121,6 @@ async function sendWeatherRequest(data) {
 		.then((geminiResult) => {
 			// mapp the prediction before pushing to store
 			const newData = renderResultPrediction(geminiResult);
-			console.log("JSON: ", newData);
 			store.render.prediction(newData);
 		})
 		.catch((error) => {

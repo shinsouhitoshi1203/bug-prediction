@@ -12,7 +12,6 @@ export const InputProvider = createContext();
 function Form() {
 	const disabled = useStore((state) => state.disabledInput);
 	const date = useRef(new Date().toISOString().split("T")[0]);
-	console.log(disabled);
 	const [province, setProvince] = useState(() => {
 		if (localStorage.getItem("bug-predict/remember")) {
 			return {

@@ -11,7 +11,11 @@ import Bar from "../../components/Bar";
 function Home() {
 	const homeRef = useRef(false);
 
-	const [content, setContent] = useState(() => <></>);
+	const [content, setContent] = useState(() => (
+		<>
+			<h1 className="hidden">Dự báo sâu bệnh cây lúa</h1>
+		</>
+	));
 
 	// selecting case
 	useEffect(() => {
@@ -21,8 +25,6 @@ function Home() {
 		useStore.subscribe(
 			(state) => state.status,
 			(status) => {
-				console.log(status);
-
 				const { inDefault, isLoading } = status;
 				if (!inDefault) {
 					const { weather, prediction } = isLoading;

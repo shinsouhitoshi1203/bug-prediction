@@ -38,7 +38,7 @@ function Province() {
 					inputRoot: "font-sans"
 				}}
 				onChange={handleSelectProvince}
-				value={province}
+				value={province || null}
 				disabled={disabled}
 				disablePortal
 				options={list.sort((a, b) => -b.label.localeCompare(a.label))}
