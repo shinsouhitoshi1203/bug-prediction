@@ -1,9 +1,9 @@
-import run from "../../predict";
+import { sampleData } from "../../../json/bugs";
+import ResultRender from "../../layouts/Prediction/ResultRender";
 function TestPage() {
 	return (
 		<>
-			<h1>Test Page</h1>
-			<p>see control log</p>
+			<ResultRender data={sampleData} />
 		</>
 	);
 }

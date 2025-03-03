@@ -30,6 +30,7 @@ const store = {
 				useStore.setState((state) => ({
 					status: {
 						...state.status,
+						inDefault: false,
 						isLoading: { weather: true, prediction: false }
 					}
 				}));

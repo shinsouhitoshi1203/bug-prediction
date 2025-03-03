@@ -1,3 +1,5 @@
+import { Skeleton } from "@mui/material";
+
 const humidityStyle = (humidity) => {
 	if (humidity > 90) return "bg-red-400";
 	if (humidity > 60) return "bg-yellow-400";
@@ -27,7 +29,15 @@ function Weather({ data }) {
 		<>
 			<h2 className="font-subheading">{city}</h2>
 			<div className="weather-info flex gap-4 items-start my-2 md:my-8 ">
-				<img src={weather?.img} alt={weather?.description.join(", ")} />
+				<div className="image-contain size-[64px] relative bg-primary/5">
+					<Skeleton variant="rectangular" width={64} height={64} />
+
+					<img
+						className="size-full absolute inset-0"
+						src={weather?.img}
+						alt={weather?.description.join(", ")}
+					/>
+				</div>
 				<div className="temperature flex items-start gap-2 flex-wrap">
 					<strong className="text-[36px]/[1] lg:text-[64px]/[1]">
 						{weather?.temperature}°

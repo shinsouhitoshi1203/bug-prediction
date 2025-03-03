@@ -88,6 +88,18 @@ async function sendWeatherRequest(data) {
 	}
 	// prepare data;
 	prepare();
+	// SAVE TO storage?
+	if (remember) {
+		localStorage.setItem("bug-predict/provinceCode", provinceCode);
+		localStorage.setItem("bug-predict/province", rest.province);
+		localStorage.setItem("bug-predict/checked", true);
+	} else {
+		localStorage.removeItem("bug-predict/province");
+		localStorage.removeItem("bug-predict/checked");
+		localStorage.removeItem("bug-predict/provinceCode");
+	}
+
+	// send request;
 	getWeather(provinceCode)
 		.then((res) => {
 			// handle response

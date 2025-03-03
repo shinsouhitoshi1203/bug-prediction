@@ -13,7 +13,16 @@ function Form() {
 	const disabled = useStore((state) => state.disabledInput);
 	const date = useRef(new Date().toISOString().split("T")[0]);
 	console.log(disabled);
-	const [province, setProvince] = useState(null);
+	const [province, setProvince] = useState(() => {
+		if (localStorage.getItem("bug-predict/remember")) {
+			return {
+				label: localStorage.getItem("bug-predict/province"),
+				value: localStorage.getItem("bug-predict/provinceCode")
+			};
+		} else {
+			return;
+		}
+	});
 	const [remember, setRemember] = useState(true);
 
 	const handleSelectProvince = useCallback((event, newValue) => {
